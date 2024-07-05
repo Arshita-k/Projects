@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, intial-scale=1.0">
+       <title>Learning Assistant</title>
+       <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Learning Assistant</h1>
+            </div>
+                <div class="mySlides fade">
+                    <h2>Summarize Content</h2>
+                    <textarea id="summarizeInput" placeholder="Enter your content..."></textarea>
+                    <button onclick="summarizeContent()">Summarize</button>
+                    <h6> Please wait for sometime after pressing the button</h6>
+                    <pre id="summaryResult"></pre>
+                </div>
+
+                <div class="mySlides fade">
+                    <h2>Generate Answers</h2>
+                    <textarea id= "questionsInput" placeholder="Enter your content..."></textarea>
+                    <textarea id= "questionInput" placeholder="Enter your question here..."></textarea>
+                    <button onclick="generateAnswer()">Answer</button>
+                    <h6> Please wait for sometime after pressing the button</h6>
+                    <pre id="answerResult"></pre>
+                </div>
+            </div>
+            
+            <br>
+            <div style="text-align:center">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+            </div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
