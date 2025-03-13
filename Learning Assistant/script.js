@@ -29,7 +29,7 @@ function summarizeContent() {
     fetch("https://api-inference.huggingface.co/models/facebook/bart-large-cnn", {
         method: 'POST',
         headers: {
-            'Authorization': 'Bearer hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+            'Authorization': 'Bearer hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({inputs: input})
@@ -42,29 +42,52 @@ function summarizeContent() {
 }
 
 async function query(data) {
-    const response = await fetch(
-        "https://api-inference.huggingface.co/models/deepset/roberta-base-squad2",
-        {
-            headers: {
-                Authorization: "Bearer hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                "Content-Type": "application/json",
-            },
-            method: "POST",
-            body: JSON.stringify(data),
+    try {
+        const response = await fetch(
+            "https://api-inference.huggingface.co/models/deepset/roberta-base-squad2",
+            {
+                headers: {
+                    Authorization: "Bearer hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                    "Content-Type": "application/json",
+                },
+                method: "POST",
+                body: JSON.stringify(data),
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-    );
-    const result = await response.json();
-    return result;
+
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error("Error in query function:", error);
+        throw error; // Re-throw to handle it in `generateAnswer`
+    }
 }
 
 function generateAnswer() {
-    const content = document.getElementById('questionsInput').value;
-    const question = document.getElementById('questionInput').value;
+    const content = document.getElementById("questionsInput").value;
+    const question = document.getElementById("questionInput").value;
 
-    query({"inputs": {
-        "question": question,
-        "context": content
-    }}).then((response) => {
-        document.getElementById('answerResult').textContent = response.data[0].text;
-    }).catch(error => console.error('Error:', error));
+    query({
+        inputs: {
+            question: question,
+            context: content,
+        },
+    })
+        .then((response) => {
+            console.log(response); // Log response to check its structure
+            // Assuming the response has `answer` in its structure
+            document.getElementById("answerResult").textContent =
+                response?.answer || "No answer found.";
+        })
+        .catch((error) => {
+            console.error("Error in generateAnswer function:", error);
+            document.getElementById("answerResult").textContent =
+                "Error fetching the answer. Please try again.";
+        });
 }
+
+
