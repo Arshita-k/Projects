@@ -26,7 +26,7 @@ function showSlides(n) {
 // 🔐 Secure summarizeContent using serverless function
 function summarizeContent() {
     const input = document.getElementById('summarizeInput').value;
-    fetch("/api/huggingface", {
+    fetch("/api/fetchs", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -44,7 +44,7 @@ function summarizeContent() {
 // 🔐 Secure query using serverless function
 async function query(data) {
     try {
-        const response = await fetch("/api/huggingface", {
+        const response = await fetch("/api/fetchs", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
