@@ -29,7 +29,7 @@ function summarizeContent() {
     fetch("https://api-inference.huggingface.co/models/facebook/bart-large-cnn", {
         method: 'POST',
         headers: {
-            'Authorization': 'Bearer hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+            'Authorization': apikey,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({inputs: input})
@@ -47,7 +47,7 @@ async function query(data) {
             "https://api-inference.huggingface.co/models/deepset/roberta-base-squad2",
             {
                 headers: {
-                    Authorization: "Bearer hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                    Authorization: apikey,
                     "Content-Type": "application/json",
                 },
                 method: "POST",
