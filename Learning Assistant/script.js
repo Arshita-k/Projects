@@ -23,7 +23,7 @@ function showSlides(n) {
     }
 }
 
-// 🔐 Secure summarizeContent using serverless function
+
 function summarizeContent() {
     const input = document.getElementById('summarizeInput').value;
     fetch("/api/fetchs", {
@@ -41,7 +41,7 @@ function summarizeContent() {
         .catch(error => console.error('Error:', error));
 }
 
-// 🔐 Secure query using serverless function
+
 async function query(data) {
     try {
         const response = await fetch("/api/fetchs", {
